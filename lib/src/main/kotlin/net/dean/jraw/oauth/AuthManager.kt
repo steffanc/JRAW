@@ -128,7 +128,7 @@ class AuthManager(
             .build())
         handleUnsuccessfulOAuthRequests(res)
 
-        return res.deserialize<OAuthDataJson>().toOAuthData()
+        return res.deserialize<OAuthDataJson>().toOAuthData(refreshToken)
     }
 
     /**

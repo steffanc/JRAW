@@ -34,6 +34,15 @@ public abstract class OAuthDataJson {
         );
     }
 
+    public final OAuthData toOAuthData(String refreshToken) {
+        return OAuthData.create(
+            /*accessToken = */ getAccessToken(),
+            /*scopes = */ Arrays.asList(getScopeList().split(" ")),
+            /*refreshToken = */ refreshToken,
+            /*expiration = */ new Date(new Date().getTime() + TimeUnit.MILLISECONDS.convert(getExpiresIn(), TimeUnit.SECONDS))
+        );
+    }
+
     public static JsonAdapter<OAuthDataJson> jsonAdapter(Moshi moshi) {
         return new AutoValue_OAuthDataJson.MoshiJsonAdapter(moshi);
     }
